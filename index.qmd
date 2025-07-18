@@ -13,7 +13,7 @@ The slides are below and the hands-on activity can be accessed via the sidebar o
 
 ---
 
-[Slides](/slides/help-from-ai-uscots25.pdf.pdf)
+[Slides](/slides/help-from-ai-uscots25.pdf)
 
 ```{=html}
 <iframe class="slide-deck" src="/slides/help-from-ai-uscots25.pdf" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
