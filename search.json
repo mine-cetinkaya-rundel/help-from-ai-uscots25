@@ -191,7 +191,7 @@
     "href": "activities/activity-1.html",
     "title": "Activity #1",
     "section": "",
-    "text": "Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.\n\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\n\n\n\n\n\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows",
+    "text": "Read the question and the sample student answer and provide feedback to the student.\n\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\n\n\n\n\n\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows",
     "crumbs": [
       "Activities",
       "Activity #1"
@@ -202,7 +202,7 @@
     "href": "activities/activity-1.html#step-1",
     "title": "Activity #1",
     "section": "",
-    "text": "Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.\n\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\n\n\n\n\n\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows",
+    "text": "Read the question and the sample student answer and provide feedback to the student.\n\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\n\n\n\n\n\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows",
     "crumbs": [
       "Activities",
       "Activity #1"
@@ -213,7 +213,7 @@
     "href": "activities/activity-1.html#step-2",
     "title": "Activity #1",
     "section": "Step 2",
-    "text": "Step 2\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, and the rubric.\nRubric\n\n\nCode uses pivot_longer().\nCode names the data frame something short and informative.\nCode names the year variable year and the inflation variable annual_inflation.\nCode transforms the year variable to numeric inside pivot_longer().\nOutput displays country_inflation_longer.\nOutput has 3 columns: country, year, and annual_inflation.\nNarrative states the correct numbers of rows and columns.\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present.",
+    "text": "Step 2\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.",
     "crumbs": [
       "Activities",
       "Activity #1"
@@ -224,7 +224,18 @@
     "href": "activities/activity-1.html#step-3",
     "title": "Activity #1",
     "section": "Step 3",
-    "text": "Step 3\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, the rubric, and a customized prompt.",
+    "text": "Step 3\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, and the rubric.\nRubric\n\n\nCode uses pivot_longer().\nCode names the data frame something short and informative.\nCode names the year variable year and the inflation variable annual_inflation.\nCode transforms the year variable to numeric inside pivot_longer().\nOutput displays country_inflation_longer.\nOutput has 3 columns: country, year, and annual_inflation.\nNarrative states the correct numbers of rows and columns.\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present.",
+    "crumbs": [
+      "Activities",
+      "Activity #1"
+    ]
+  },
+  {
+    "objectID": "activities/activity-1.html#step-4",
+    "href": "activities/activity-1.html#step-4",
+    "title": "Activity #1",
+    "section": "Step 4",
+    "text": "Step 4\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, the rubric, and a customized prompt.",
     "crumbs": [
       "Activities",
       "Activity #1"
