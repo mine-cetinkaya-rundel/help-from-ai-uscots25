@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -71,6 +106,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <meta property="og:title" content="Activity – Help from AI">
+<meta property="og:description" content="Leveraging LLMs for student feedback in introductory data science courses breakout session at USCOTS 2025">
 <meta property="og:image" content="https://mine-cetinkaya-rundel.github.io/help-from-ai-uscots25/images/card.png">
 <meta property="og:site_name" content="Help from AI">
 <meta property="og:image:height" content="1080">
@@ -151,8 +187,372 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"prompt.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="modeling" class="level1">
+<h1>Modeling</h1>
+<p>Load information from text files:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>question <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/model-birth-simple-linear/model-births-simple-linear-Q.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rubric <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/model-birth-simple-linear/model-births-simple-linear-R.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>rubric_detailed <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/model-birth-simple-linear/model-births-simple-linear-RD.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>bad_answer <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>good_answer <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Bad</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Good</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Good, again</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Evaluate a <strong>bad</strong> answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> question, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rubric =</span> rubric,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">answer =</span> bad_answer</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `chat_claude()` was deprecated in ellmer 0.2.0.
+ℹ Please use `chat_anthropic()` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using model = "claude-sonnet-4-20250514".</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Feedback:**
+
+- **Part (a) - Code correctly fits linear regression model with the correct 
+response and predictor variables using tidymodels functions:** The code 
+correctly uses `linear_reg()` and `fit()` with the appropriate response 
+(weight) and predictor (habit) variables.
+
+- **Part (a) - Regression summary is displayed with `tidy()`:** The regression 
+summary is not displayed with `tidy()` - you've only shown the fitted model 
+object itself.
+
+- **Part (b) - Estimated least squares regression line is correct:** The 
+equation format is acceptable but the coefficient values don't match the actual
+model output, and the notation could be clearer (using $\widehat{y}$ and proper
+variable names).
+
+- **Part (c) - Narrative provides correct interpretation of the intercept in 
+context of the data:** The interpretation is confusing and contains several 
+errors - it doesn't clearly explain what the intercept represents in terms of 
+expected baby weight, and uses imprecise language like "always" instead of "on 
+average."
+
+- **Part (c) - Narrative states that the intercept is meaningful and provides 
+correct justification:** No clear statement is made about whether the intercept
+is meaningful, and the justification is unclear and contains factual errors.
+
+- **Part (d) - Narrative provides correct interpretation of the slope in 
+context of the data:** The interpretation captures the direction correctly but 
+doesn't use appropriate language like "on average" or "expected" - it states 
+this as a definitive fact about individuals rather than an expectation.
+
+- **Code smell, style, and readability:** The code violates tidyverse style 
+guidelines by lacking proper spacing (missing spaces around `=` in 
+`fit(weight~habit,data=births14_habitgiven)` and after the comma).</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Evaluate a <strong>good</strong> answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> question, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rubric =</span> rubric,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">answer =</span> good_answer</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using model = "claude-sonnet-4-20250514".</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Feedback:**
+
+• **Part (a) - Code correctly fits linear regression model with the correct 
+response and predictor variables using tidymodels functions.** Your code 
+correctly fits a linear regression model using `linear_reg()` and `fit()` with 
+weight as the response and habit as the predictor.
+
+• **Part (a) - Regression summary is displayed with `tidy()`.** The regression 
+summary is not displayed with `tidy()` - you need to add a line using the 
+`tidy()` function to show the model coefficients in a clean format.
+
+• **Part (b) - Estimated least squares regression line is correct.** Your 
+equation has incorrect coefficient values and should use proper notation with a
+"hat" symbol for the predicted value.
+
+• **Part (c) - Narrative provides correct interpretation of the intercept in 
+context of the data.** Your interpretation is confusing and contains errors - 
+you need to clearly explain what the intercept represents in terms of expected 
+baby weight for a specific group, using language about averages or 
+expectations.
+
+• **Part (c) - Narrative states that the intercept is meaningful and provides 
+correct justification.** You did not address whether the intercept is 
+meaningful or provide justification for your conclusion.
+
+• **Part (d) - Narrative provides correct interpretation of the slope in 
+context of the data.** Your interpretation needs to use language about averages
+or expectations rather than stating something definitive about individual 
+babies.
+
+• **Code smell, style, and readability: The code should follow the Tidyverse 
+style guide.** Your code has minor spacing issues around operators and could 
+benefit from better formatting, but overall follows most style guidelines 
+including proper use of the base pipe.</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Now evaluate a <strong>good</strong> answer <strong>again:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> question, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rubric =</span> rubric,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">answer =</span> good_answer</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using model = "claude-sonnet-4-20250514".</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Feedback:**
+
+- **Part (a) - Code correctly fits linear regression model with the correct 
+response and predictor variables using tidymodels functions.** The code 
+correctly uses `linear_reg()` and `fit()` with weight as the response and habit
+as the predictor variable.
+
+- **Part (a) - Regression summary is displayed with `tidy()`.** The regression 
+summary is not displayed with `tidy()` - you need to add `|&gt; tidy()` to your 
+model object to show the coefficient estimates and other summary statistics.
+
+- **Part (b) - Estimated least squares regression line is correct.** The 
+equation format is close but has incorrect coefficient values and variable 
+naming - you need to extract the actual coefficients from your model output and
+use proper notation for the predicted value.
+
+- **Part (c) - Narrative provides correct interpretation of the intercept in 
+context of the data.** The interpretation is unclear and contains confusing 
+language - you need to clearly state what the intercept represents in terms of 
+expected baby weight for a specific group, using "on average" or "expected" 
+language.
+
+- **Part (c) - Narrative states that the intercept is meaningful and provides 
+correct justification.** The response does not clearly address whether the 
+intercept is meaningful or provide proper justification about the plausibility 
+of the intercept value in this context.
+
+- **Part (d) - Narrative provides correct interpretation of the slope in 
+context of the data.** The interpretation is close but needs to include "on 
+average" or "expected" language rather than making statements about individual 
+babies, and should be more precise about the direction and magnitude of the 
+difference.
+
+- **Code smell, style, and readability: The code should follow the Tidyverse 
+style guide.** The code has minor spacing issues (missing spaces around 
+operators) and could benefit from line breaks after pipes, but generally 
+follows most style guidelines.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="tidying" class="level1">
+<h1>Tidying</h1>
+<p>Load information from text files:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>question <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-Q.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rubric <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-R.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>rubric_detailed <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-RD.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>bad_answer <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-bad.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>good_answer <span class="ot">&lt;-</span> <span class="fu">read_lines</span>(<span class="st">"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-good.qmd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue_collapse</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"---.*?---"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Bad</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Bad, again</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Good</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Evaluate a <strong>bad</strong> answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> question, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rubric =</span> rubric,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">answer =</span> bad_answer</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using model = "claude-sonnet-4-20250514".</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Feedback:**
+
+• **Code uses `pivot_longer()`**: ✓ The code correctly uses `pivot_longer()` to
+reshape the data from wide to long format.
+
+• **Code names the data frame something short and informative**: ✗ The code 
+overwrites the original `country_inflation` data frame instead of creating a 
+new one with a different name as required.
+
+• **Code names the year variable `year` and the inflation variable 
+`annual_inflation`**: ✗ While the year variable is correctly named `year`, the 
+inflation variable is named `inflationrate` instead of the required 
+`annual_inflation`.
+
+• **Code transforms the year variable to numeric inside `pivot_longer()`**: ✗ 
+The code is missing the `names_transform = as.numeric` argument that would 
+convert the year variable to numeric during the pivot operation.
+
+• **Output displays `country_inflation_longer`**: ✗ The output displays 
+`country_inflation` instead of a new data frame with a different name.
+
+• **Output has 3 columns: `country`, `year`, and `annual_inflation`**: ✗ While 
+the output has 3 columns, one is named `inflationrate` instead of the required 
+`annual_inflation`.
+
+• **Narrative states the correct numbers of rows and columns**: ✓ The narrative
+correctly states there are 3 columns and 1,178 rows.
+
+• **Code style and readability**: ✗ The code has inconsistent spacing around 
+the `=` signs and lacks proper indentation alignment within the 
+`pivot_longer()` function arguments.</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Now, evaluate a <strong>bad</strong> answer again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> question, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rubric =</span> rubric,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">answer =</span> bad_answer</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using model = "claude-sonnet-4-20250514".</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Feedback:**
+
+• Code uses `pivot_longer()` - ✓ The code correctly uses `pivot_longer()` to 
+reshape the data.
+
+• Code names the data frame something short and informative - ✗ The code 
+overwrites the original `country_inflation` data frame instead of creating a 
+new one with a different name as required.
+
+• Code names the year variable `year` and the inflation variable 
+`annual_inflation` - ✗ While the year variable is correctly named `year`, the 
+inflation variable is named `inflationrate` instead of the required 
+`annual_inflation`.
+
+• Code transforms the year variable to numeric inside `pivot_longer()` - ✗ The 
+code is missing the `names_transform = as.numeric` argument that was 
+specifically required to convert the year variable to numeric.
+
+• Output displays `country_inflation_longer` - ✗ The output shows 
+`country_inflation` instead of a new data frame with a different name.
+
+• Output has 3 columns: `country`, `year`, and `annual_inflation` - ✗ While 
+there are 3 columns, the inflation column is named `inflationrate` rather than 
+`annual_inflation`.
+
+• Narrative states the correct numbers of rows and columns, 1,178 rows and 3 - 
+✓ The narrative correctly states there are 3 columns and 1,178 rows.
+
+• Code style and readability: Line breaks after each |&gt;, proper indentation, 
+spaces around = signs if they are present, and spaces after commas if they are 
+present - ✓ The code follows good formatting practices with proper line breaks,
+indentation, and spacing.</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Evaluate a <strong>good</strong> answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prompt</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> question, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rubric =</span> rubric,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">answer =</span> good_answer</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using model = "claude-sonnet-4-20250514".</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Feedback:**
+
+• **Code uses `pivot_longer()`** - This requirement is met as the code 
+correctly uses `pivot_longer()` to reshape the data from wide to long format.
+
+• **Code names the data frame something short and informative** - This 
+requirement is met as `yearly_inflation` is both concise and clearly describes 
+the content of the data frame.
+
+• **Code names the year variable `year` and the inflation variable 
+`annual_inflation`** - This requirement is met as the code uses `names_to = 
+"year"` and `values_to = "annual_inflation"` to create the correctly named 
+columns.
+
+• **Code transforms the year variable to numeric inside `pivot_longer()`** - 
+This requirement is met as the code includes `names_transform = as.numeric` 
+within the `pivot_longer()` function.
+
+• **Output displays `country_inflation_longer`** - This requirement is not met 
+as the output shows `yearly_inflation` instead of the expected data frame name.
+
+• **Output has 3 columns: `country`, `year`, and `annual_inflation`** - This 
+requirement is met as the resulting data frame contains exactly these three 
+columns.
+
+• **Narrative states the correct numbers of rows and columns, 1,178 rows and 
+3** - This requirement is met as the narrative correctly identifies both the 
+number of rows and columns.
+
+• **Code style and readability: Line breaks after each |&gt;, proper indentation, 
+spaces around = signs if they are present, and spaces after commas if they are 
+present** - This requirement is met as the code follows good formatting 
+practices with proper line breaks, indentation, and spacing.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

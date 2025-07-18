@@ -1,5 +1,182 @@
 [
   {
+    "objectID": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-sample-answer-bad.html",
+    "href": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-sample-answer-bad.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() %&gt;% fit(weight~habit,data=births14_habitgiven)\n\nwt_habit_fit\n\n\n\n\n\\[ y = 7.2 + 0.6\\times smoker_factor \\]\n\nWhen the habit factor value = 0, and because the LSRL line is negative, and the median birth weight for smoking mothers is less than non-smoking mothers. The weight of mothers born to non-smoker mothers is always 7.27 pounds.\nA baby born to a smoker is 0.59 pounds lighter than a baby with a non-smoker mother."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-A.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-A.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() |&gt;\n  fit(weight ~ habit, data = births14_habitgiven)\n\ntidy(wt_habit_fit)\n\n\n\n\n\\[ \\widehat{y} = 7.27 + (-0.59)\\times smoker \\]\n\nThe expected weight of babies born when the mother is a non-smoker is 7.27 pounds. This intercept is meaningful in the context of the data because it is plausible that women in the sample are non-smokers, and 7.27 is a possible weight of a newborn baby.\nBabies born to smokers are expected to be about 0.59 pounds lighter than babies born to non-smokers."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-Q.html",
+    "href": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-Q.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "For this part of the analysis, the data set that will be used is called births14 , and it is included in the openintro package you loaded at the beginning of the assignment. Note: this question relies on an earlier part of the assignment, where the births14 dataset is filtered to remove NA values and assigned the name births14_habitgiven.\n\nFit a linear model that predicts weight from habit and save the model object. Then, provide the tidy summary output.\nWrite the estimated least squares regression line below using proper notation.\nInterpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?\nInterpret the slope in the context of the data and the research question."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-R.html",
+    "href": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-R.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "Part (a) - Code correctly fits linear regression model with the correct response and predictor variables using tidymodels functions.\nPart (a) - Regression summary is displayed with tidy().\nPart (b) - Estimated least squares regression line is correct.\nPart (c) - Narrative provides correct interpretation of the intercept in context of the data.\nPart (c) - Narrative states that the intercept is meaningful and provides correct justification.\nPart (d) - Narrative provides correct interpretation of the slope in context of the data.\nCode smell, style, and readability: The code should follow the Tidyverse style guide."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-good.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-good.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() |&gt;\n  fit(weight ~ habit, data = births14_habitgiven)\n\ntidy(wt_habit_fit)\n\n\n\n\n\\[ \\widehat{weight} = 7.27 - 0.59 \\times smoker \\]\n\nThe expected weight of babies born to non-smoker mothers is 7.27 pounds. This intercept is meaningful because it is plausible that women in the sample are non-smokers, and 7.27 lbs is a possible weight of a newborn baby.\nBabies born to smokers are, on average, about 0.59 pounds lighter than babies with non-smoker mothers."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-Q.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-Q.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "For this part of the analysis, the data set that will be used is called births14 , and it is included in the openintro package you loaded at the beginning of the assignment. Note: this question relies on an earlier part of the assignment, where the births14 dataset is filtered to remove NA values and assigned the name births14_habitgiven.\n\nFit a linear model that predicts weight from habit and save the model object. Then, provide the tidy summary output.\nWrite the estimated least squares regression line below using proper notation.\nInterpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?\nInterpret the slope in the context of the data and the research question."
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-good.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-good.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "library(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThe data frame, “yearly_inflation,” has 1,178 rows and three columns.\n\nyearly_inflation &lt;- country_inflation |&gt;\n  pivot_longer(\n    cols = `1993`:`2023`,\n    names_to = \"year\",\n    names_transform = as.numeric,\n    values_to = \"annual_inflation\"\n  )\n\nyearly_inflation"
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-mediocre-1.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-mediocre-1.html",
+    "title": "\ncountry_inflation pivot longer",
+    "section": "",
+    "text": "library(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(here::here(\"data\", \"country-inflation.csv\"))\n\nThe resulting data frame has 3 columns and 1178 rows.\n\nnew_country_inflation &lt;- country_inflation |&gt; \n  pivot_longer(\n    cols = -country,\n    names_to = \"year\",\n    values_transform = as.numeric,\n    values_to = \"inflation_rate\",\n  )\nnew_country_inflation"
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-bad.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-bad.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "library(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)"
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-R.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-R.html",
+    "title": "country_inflation pivot longer",
+    "section": "",
+    "text": "Code uses pivot_longer()\nCode names the data frame something short and informative\nCode names the year variable year and the inflation variable annual_inflation\nCode transforms the year variable to numeric inside pivot_longer()\nOutput displays country_inflation_longer\nOutput has 3 columns: country, year, and annual_inflation\nNarrative states the correct numbers of rows and columns\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present."
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-A.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-A.html",
+    "title": "\ncountry_inflation pivot longer",
+    "section": "",
+    "text": "library(tidyverse)\n\nThe data frame has 1,178 rows and 3 columns.\n\ncountry_inflation &lt;- read_csv(here::here(\"data\", \"country-inflation.csv\"))\n\n\ncountry_inflation_longer &lt;- country_inflation |&gt;\n  pivot_longer(\n    cols = !country,  # alternative: -country\n    names_to = \"year\",\n    values_to = \"annual_inflation\",\n    names_transform = as.numeric\n  )\ncountry_inflation_longer"
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-R.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-R.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "Code uses pivot_longer().\nCode names the data frame something short and informative.\nCode names the year variable year and the inflation variable annual_inflation.\nCode transforms the year variable to numeric inside pivot_longer().\nOutput displays country_inflation_longer.\nOutput has 3 columns: country, year, and annual_inflation.\nNarrative states the correct numbers of rows and columns.\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present."
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html",
+    "href": "activities/system-prompt/pipes.html",
+    "title": "Pipes",
+    "section": "",
+    "text": "Use |&gt; to emphasise a sequence of actions, rather than the object that the actions are being performed on.\nThe tidyverse has been designed to work particularly well with the pipe, but you can use it with any code, particularly in conjunction with the _ placeholder.\n\nstrings |&gt;\n  str_replace(\"a\", \"b\") |&gt;\n  str_replace(\"x\", \"y\")\n\nstrings |&gt;\n  gsub(\"a\", \"b\", x = _) |&gt;\n  gsub(\"x\", \"y\", x = _)\n\nAvoid using the pipe when:\n\nYou need to manipulate more than one object at a time. Reserve pipes for a sequence of steps applied to one primary object.\nThere are meaningful intermediate objects that could be given informative names.\n\n|&gt; should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.\n\n# Good\niris |&gt;\n  summarize(across(where(is.numeric), mean), .by = Species) |&gt;\n  pivot_longer(!Species, names_to = \"measure\", values_to = \"value\") |&gt;\n  arrange(value)\n\n# Bad\niris |&gt; summarize(across(where(is.numeric), mean), .by = Species) |&gt;\npivot_longer(!Species, names_to = \"measure\", values_to = \"value\") |&gt;\narrange(value)\n\n\nIf the arguments to a function don’t all fit on one line, put each argument on its own line and indent:\n\n# Good\niris |&gt;\n  summarise(\n    Sepal.Length = mean(Sepal.Length),\n    Sepal.Width = mean(Sepal.Width),\n    .by = Species\n  )\n\n# Bad\niris |&gt;\n  summarise(Sepal.Length = mean(Sepal.Length), Sepal.Width = mean(Sepal.Width), .by = Species)\n\nFor data analysis, we recommend using the pipe whenever a function needs to span multiple lines, even if it’s only a single step.\n\n# Bad\nsummarise(\n  iris,\n  Sepal.Length = mean(Sepal.Length),\n  Sepal.Width = mean(Sepal.Width),\n  .by = Species\n)\n\n\nIt’s ok to write a short pipe on a single line:\n\n# Ok\niris |&gt; subset(Species == \"virginica\") |&gt; _$Sepal.Length\niris |&gt; summarise(width = Sepal.Width, .by = Species) |&gt; arrange(width)\n\nBut because short pipes often become longer pipes, we recommend that you generally stick to one function per line:\n\n# Better\niris |&gt;\n  subset(Species == \"virginica\") |&gt;\n  _$Sepal.Length\n\niris |&gt;\n  summarise(width = Sepal.Width, .by = Species) |&gt;\n  arrange(width)\n\nSometimes it’s useful to include a short pipe as an argument to a function in a longer pipe. Carefully consider whether the code is more readable with a short inline pipe (which doesn’t require a lookup elsewhere) or if it’s better to move the code outside the pipe and give it an evocative name.\n\n# Good\nx |&gt;\n  semi_join(y |&gt; filter(is_valid))\n\n# Ok\nx |&gt;\n  select(a, b, w) |&gt;\n  left_join(y |&gt; select(a, b, v), join_by(a, b))\n\n# Better\nx_join &lt;- x |&gt; select(a, b, w)\ny_join &lt;- y |&gt; select(a, b, v)\nleft_join(x_join, y_join, join_by(a, b))\n\n\nThere are three acceptable forms of assignment:\n\n\nVariable name and assignment on separate lines:\n\niris_long &lt;-\n  iris |&gt;\n  gather(measure, value, -Species) |&gt;\n  arrange(-value)\n\n\n\nVariable name and assignment on the same line:\n\niris_long &lt;- iris |&gt;\n  gather(measure, value, -Species) |&gt;\n  arrange(-value)\n\n\n\nAssignment at the end of the pipe with -&gt;:\n\niris |&gt;\n  gather(measure, value, -Species) |&gt;\n  arrange(-value) -&gt;\n  iris_long\n\n\n\nI think that the third is the most natural to write, but makes reading a little harder: when the name comes first, it can act as a heading to remind you of the purpose of the pipe.\n\nWe recommend you use the base |&gt; pipe instead of magrittr’s %&gt;%.\n\n# Good\niris |&gt;\n  summarise(width = Sepal.Width, .by = Species) |&gt;\n  arrange(width)\n\n# Bad\niris %&gt;%\n  summarise(width = Sepal.Width, .by = Species) %&gt;%\n  arrange(width)\n\nAs of R 4.3.0, the base pipe provides all the features from magrittr that we recommend using."
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html#introduction",
+    "href": "activities/system-prompt/pipes.html#introduction",
+    "title": "Pipes",
+    "section": "",
+    "text": "Use |&gt; to emphasise a sequence of actions, rather than the object that the actions are being performed on.\nThe tidyverse has been designed to work particularly well with the pipe, but you can use it with any code, particularly in conjunction with the _ placeholder.\n\nstrings |&gt;\n  str_replace(\"a\", \"b\") |&gt;\n  str_replace(\"x\", \"y\")\n\nstrings |&gt;\n  gsub(\"a\", \"b\", x = _) |&gt;\n  gsub(\"x\", \"y\", x = _)\n\nAvoid using the pipe when:\n\nYou need to manipulate more than one object at a time. Reserve pipes for a sequence of steps applied to one primary object.\nThere are meaningful intermediate objects that could be given informative names."
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html#whitespace",
+    "href": "activities/system-prompt/pipes.html#whitespace",
+    "title": "Pipes",
+    "section": "",
+    "text": "|&gt; should always have a space before it, and should usually be followed by a new line. After the first step, each line should be indented by two spaces. This structure makes it easier to add new steps (or rearrange existing steps) and harder to overlook a step.\n\n# Good\niris |&gt;\n  summarize(across(where(is.numeric), mean), .by = Species) |&gt;\n  pivot_longer(!Species, names_to = \"measure\", values_to = \"value\") |&gt;\n  arrange(value)\n\n# Bad\niris |&gt; summarize(across(where(is.numeric), mean), .by = Species) |&gt;\npivot_longer(!Species, names_to = \"measure\", values_to = \"value\") |&gt;\narrange(value)"
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html#long-lines",
+    "href": "activities/system-prompt/pipes.html#long-lines",
+    "title": "Pipes",
+    "section": "",
+    "text": "If the arguments to a function don’t all fit on one line, put each argument on its own line and indent:\n\n# Good\niris |&gt;\n  summarise(\n    Sepal.Length = mean(Sepal.Length),\n    Sepal.Width = mean(Sepal.Width),\n    .by = Species\n  )\n\n# Bad\niris |&gt;\n  summarise(Sepal.Length = mean(Sepal.Length), Sepal.Width = mean(Sepal.Width), .by = Species)\n\nFor data analysis, we recommend using the pipe whenever a function needs to span multiple lines, even if it’s only a single step.\n\n# Bad\nsummarise(\n  iris,\n  Sepal.Length = mean(Sepal.Length),\n  Sepal.Width = mean(Sepal.Width),\n  .by = Species\n)"
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html#short-pipes",
+    "href": "activities/system-prompt/pipes.html#short-pipes",
+    "title": "Pipes",
+    "section": "",
+    "text": "It’s ok to write a short pipe on a single line:\n\n# Ok\niris |&gt; subset(Species == \"virginica\") |&gt; _$Sepal.Length\niris |&gt; summarise(width = Sepal.Width, .by = Species) |&gt; arrange(width)\n\nBut because short pipes often become longer pipes, we recommend that you generally stick to one function per line:\n\n# Better\niris |&gt;\n  subset(Species == \"virginica\") |&gt;\n  _$Sepal.Length\n\niris |&gt;\n  summarise(width = Sepal.Width, .by = Species) |&gt;\n  arrange(width)\n\nSometimes it’s useful to include a short pipe as an argument to a function in a longer pipe. Carefully consider whether the code is more readable with a short inline pipe (which doesn’t require a lookup elsewhere) or if it’s better to move the code outside the pipe and give it an evocative name.\n\n# Good\nx |&gt;\n  semi_join(y |&gt; filter(is_valid))\n\n# Ok\nx |&gt;\n  select(a, b, w) |&gt;\n  left_join(y |&gt; select(a, b, v), join_by(a, b))\n\n# Better\nx_join &lt;- x |&gt; select(a, b, w)\ny_join &lt;- y |&gt; select(a, b, v)\nleft_join(x_join, y_join, join_by(a, b))"
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html#assignment",
+    "href": "activities/system-prompt/pipes.html#assignment",
+    "title": "Pipes",
+    "section": "",
+    "text": "There are three acceptable forms of assignment:\n\n\nVariable name and assignment on separate lines:\n\niris_long &lt;-\n  iris |&gt;\n  gather(measure, value, -Species) |&gt;\n  arrange(-value)\n\n\n\nVariable name and assignment on the same line:\n\niris_long &lt;- iris |&gt;\n  gather(measure, value, -Species) |&gt;\n  arrange(-value)\n\n\n\nAssignment at the end of the pipe with -&gt;:\n\niris |&gt;\n  gather(measure, value, -Species) |&gt;\n  arrange(-value) -&gt;\n  iris_long\n\n\n\nI think that the third is the most natural to write, but makes reading a little harder: when the name comes first, it can act as a heading to remind you of the purpose of the pipe."
+  },
+  {
+    "objectID": "activities/system-prompt/pipes.html#magrittr",
+    "href": "activities/system-prompt/pipes.html#magrittr",
+    "title": "Pipes",
+    "section": "",
+    "text": "We recommend you use the base |&gt; pipe instead of magrittr’s %&gt;%.\n\n# Good\niris |&gt;\n  summarise(width = Sepal.Width, .by = Species) |&gt;\n  arrange(width)\n\n# Bad\niris %&gt;%\n  summarise(width = Sepal.Width, .by = Species) %&gt;%\n  arrange(width)\n\nAs of R 4.3.0, the base pipe provides all the features from magrittr that we recommend using."
+  },
+  {
+    "objectID": "activities/activity-2.html",
+    "href": "activities/activity-2.html",
+    "title": "Activity #2",
+    "section": "",
+    "text": "Use ellmer to interact with the an LLM (Anthropic, in this case) to generate feedback.",
+    "crumbs": [
+      "Activities",
+      "Activity #2"
+    ]
+  },
+  {
+    "objectID": "activities/activity-2.html#tooling",
+    "href": "activities/activity-2.html#tooling",
+    "title": "Activity #2",
+    "section": "Tooling",
+    "text": "Tooling\nprompt.R:\n\n\nfunction (question, rubric, answer) \n{\n    chat &lt;- chat_anthropic(system_prompt = paste(\"You are a helpful course instructor teaching a course on data science with the R programming language and the tidyverse and tidymodels suite of packages. You like to give succinct but precise feedback.\", \n        glue_collapse(read_lines(\"system-prompt/pipes.qmd\"))))\n    chat$chat(glue(\"Carefully read the {question} and the {rubric_detailed}, then evaluate {answer} against the {rubric_detailed} to provide feedback. \\n      Provide feedback in an output section named **Feedback:**. \\n      Format the feedback as bullet points: Each bullet point should first state the rubric item text from {rubric}, and then provide one sentence explaining whether the {answer} meets the {rubric} item.\\n      Do not give away the correct answer in the feedback.\"))\n}\n\n\nNote: The system prompt points to a file that has the contents of the pipes chapter of the Tidyverse style guide.",
+    "crumbs": [
+      "Activities",
+      "Activity #2"
+    ]
+  },
+  {
+    "objectID": "activities/activity-2.html#example-tidying",
+    "href": "activities/activity-2.html#example-tidying",
+    "title": "Activity #2",
+    "section": "Example: Tidying",
+    "text": "Example: Tidying\nBelow is a question on tidying.\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder.\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\nCode for constructing function inputsquestion &lt;- read_lines(\"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-Q.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\nrubric &lt;- read_lines(\"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-R.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\nrubric_detailed &lt;- read_lines(\"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-RD.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\nbad_answer &lt;- read_lines(\"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-bad.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\ngood_answer &lt;- read_lines(\"questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-good.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\n\n\n\nBad\nBad, again\nGood\n\n\n\nBelow is what we might consider a bad answer to this question.\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows\n\n\n\nProvide feedback to the answer above using the following rubric.\n\n\nCode uses pivot_longer().\nCode names the data frame something short and informative.\nCode names the year variable year and the inflation variable annual_inflation.\nCode transforms the year variable to numeric inside pivot_longer().\nOutput displays country_inflation_longer.\nOutput has 3 columns: country, year, and annual_inflation.\nNarrative states the correct numbers of rows and columns.\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present.\n\n\n\nprompt(\n  question = question, \n  rubric = rubric,\n  answer = bad_answer\n)\n\nUsing model = \"claude-sonnet-4-20250514\".\n\n\n**Feedback:**\n\n- **Code uses `pivot_longer()`**: ✓ The code correctly uses `pivot_longer()` to\nreshape the data from wide to long format.\n\n- **Code names the data frame something short and informative**: ✗ The data \nframe is named `df` which is too generic and not informative about what the \ndata contains.\n\n- **Code names the year variable `year` and the inflation variable \n`annual_inflation`**: ✗ While the year variable is correctly named `year`, the \ninflation variable is named `inflationrate` instead of the required \n`annual_inflation`.\n\n- **Code transforms the year variable to numeric inside `pivot_longer()`**: ✗ \nThe code is missing the `names_transform = as.numeric` argument that was \nspecifically required to convert the year variable to numeric type.\n\n- **Output displays `country_inflation_longer`**: ✗ The output shows `df` \ninstead of the expected `country_inflation_longer` data frame name.\n\n- **Output has 3 columns: `country`, `year`, and `annual_inflation`**: ✗ While \nthere are 3 columns, the inflation column is named `inflationrate` rather than \n`annual_inflation`.\n\n- **Narrative states the correct numbers of rows and columns**: ✗ The narrative\nstates \"1178 rows and 3\" but should state \"1,178 rows and 3 columns\" for \ncomplete accuracy.\n\n- **Code style and readability**: ✗ The code has inconsistent spacing (missing \nspaces around `=` in `names_to = \"year\"` and `values_to = \"inflationrate\"`), \nand the closing parenthesis alignment could be improved.\n\n\n\n\nProvide feedback to the same answer from the previous tab.\n\nprompt(\n  question = question, \n  rubric = rubric,\n  answer = bad_answer\n)\n\nUsing model = \"claude-sonnet-4-20250514\".\n\n\n**Feedback:**\n\n• **Code uses `pivot_longer()`** - ✓ The code correctly uses `pivot_longer()` \nto reshape the data from wide to long format.\n\n• **Code names the data frame something short and informative** - ✗ The data \nframe is named `df` which is not informative about what the data contains.\n\n• **Code names the year variable `year` and the inflation variable \n`annual_inflation`** - ✗ While the year variable is correctly named `year`, the\ninflation variable is named `inflationrate` instead of the required \n`annual_inflation`.\n\n• **Code transforms the year variable to numeric inside `pivot_longer()`** - ✗ \nThe code is missing the `names_transform = as.numeric` argument that was \nspecifically required to convert the year variable to numeric during pivoting.\n\n• **Output displays `country_inflation_longer`** - ✗ The output shows a data \nframe named `df` rather than the expected `country_inflation_longer`.\n\n• **Output has 3 columns: `country`, `year`, and `annual_inflation`** - ✗ While\nthere are 3 columns, the third column is named `inflationrate` rather than \n`annual_inflation`.\n\n• **Narrative states the correct numbers of rows and columns** - ✗ The \nnarrative states 1178 rows and 3 columns but places this information before the\ncode chunk rather than after displaying the results.\n\n• **Code style and readability** - ✗ The code has inconsistent spacing (missing\nspaces after commas in some places) and could benefit from better formatting \nalignment within the `pivot_longer()` function.\n\n\n\n\nBelow is what we might consider a good answer to this question.\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThe data frame, “yearly_inflation,” has 1,178 rows and three columns.\n\nyearly_inflation &lt;- country_inflation |&gt;\n  pivot_longer(\n    cols = `1993`:`2023`,\n    names_to = \"year\",\n    names_transform = as.numeric,\n    values_to = \"annual_inflation\"\n  )\n\nyearly_inflation\n\n# A tibble: 1,178 × 3\n   country    year annual_inflation\n   &lt;chr&gt;     &lt;dbl&gt;            &lt;dbl&gt;\n 1 Australia  1993            1.75 \n 2 Australia  1994            1.97 \n 3 Australia  1995            4.63 \n 4 Australia  1996            2.62 \n 5 Australia  1997            0.225\n 6 Australia  1998            0.860\n 7 Australia  1999            1.48 \n 8 Australia  2000            4.46 \n 9 Australia  2001            4.41 \n10 Australia  2002            2.98 \n# ℹ 1,168 more rows\n\n\n\nProvide feedback to the answer above.\n\nprompt(\n  question = question, \n  rubric = rubric,\n  answer = good_answer\n)\n\nUsing model = \"claude-sonnet-4-20250514\".\n\n\n**Feedback:**\n\n• **Code uses `pivot_longer()`:** ✓ The code correctly uses `pivot_longer()` to\nreshape the data from wide to long format.\n\n• **Code names the data frame something short and informative:** ✓ The data \nframe is named `yearly_inflation`, which is both concise and descriptive of its\ncontents.\n\n• **Code names the year variable `year` and the inflation variable \n`annual_inflation`:** ✓ The code properly uses `names_to = \"year\"` and \n`values_to = \"annual_inflation\"` to create the required column names.\n\n• **Code transforms the year variable to numeric inside `pivot_longer()`:** ✓ \nThe code includes `names_transform = as.numeric` to convert the year variable \nto numeric type during the pivot operation.\n\n• **Output displays `country_inflation_longer`:** ✗ The rubric expects the \noutput to display a data frame named `country_inflation_longer`, but the code \ncreates and displays `yearly_inflation` instead.\n\n• **Output has 3 columns: `country`, `year`, and `annual_inflation`:** ✓ The \nresulting data frame contains the three required columns with the correct \nnames.\n\n• **Narrative states the correct numbers of rows and columns:** ✓ The narrative\ncorrectly states that the data frame has 1,178 rows and 3 columns.\n\n• **Code style and readability:** ✓ The code follows proper tidyverse style \nwith line breaks after the pipe operator, appropriate indentation, and proper \nspacing around operators and after commas.",
+    "crumbs": [
+      "Activities",
+      "Activity #2"
+    ]
+  },
+  {
+    "objectID": "activities/activity-2.html#example-modeling",
+    "href": "activities/activity-2.html#example-modeling",
+    "title": "Activity #2",
+    "section": "Example: Modeling",
+    "text": "Example: Modeling\nBelow is a question on modeling:\nFor this part of the analysis, the data set that will be used is called births14 , and it is included in the openintro package you loaded at the beginning of the assignment. Note: this question relies on an earlier part of the assignment, where the births14 dataset is filtered to remove NA values and assigned the name births14_habitgiven.\n\nFit a linear model that predicts weight from habit and save the model object. Then, provide the tidy summary output.\nWrite the estimated least squares regression line below using proper notation.\nInterpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?\nInterpret the slope in the context of the data and the research question.\n\n\n\nCode for constructing function inputsquestion &lt;- read_lines(\"questions/model-birth-simple-linear/model-births-simple-linear-Q.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\nrubric &lt;- read_lines(\"questions/model-birth-simple-linear/model-births-simple-linear-R.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\nrubric_detailed &lt;- read_lines(\"questions/model-birth-simple-linear/model-births-simple-linear-RD.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\nbad_answer &lt;- read_lines(\"questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\ngood_answer &lt;- read_lines(\"questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.qmd\") |&gt;\n  glue_collapse() |&gt;\n  str_remove(\"---.*?---\")\n\n\n\n\nBad\nGood\nGood, again\n\n\n\nBelow is what we might consider a bad answer to this question.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() %&gt;% fit(weight~habit,data=births14_habitgiven)\n\nwt_habit_fit\n\nparsnip model object\n\n\nCall:\nstats::lm(formula = weight ~ habit, data = data)\n\nCoefficients:\n(Intercept)  habitsmoker  \n     7.2699      -0.5927  \n\n\n\n\n\n\\[ y = 7.2 + 0.6\\times smoker_factor \\]\n\nWhen the habit factor value = 0, and because the LSRL line is negative, and the median birth weight for smoking mothers is less than non-smoking mothers. The weight of mothers born to non-smoker mothers is always 7.27 pounds.\nA baby born to a smoker is 0.59 pounds lighter than a baby with a non-smoker mother.\n\nProvide feedback to the answer above using the following rubric.\n\nPart (a) - Code correctly fits linear regression model with the correct response and predictor variables using tidymodels functions.\nPart (a) - Regression summary is displayed with tidy().\nPart (b) - Estimated least squares regression line is correct.\nPart (c) - Narrative provides correct interpretation of the intercept in context of the data.\nPart (c) - Narrative states that the intercept is meaningful and provides correct justification.\nPart (d) - Narrative provides correct interpretation of the slope in context of the data.\nCode smell, style, and readability: The code should follow the Tidyverse style guide.\n\n\nprompt(\n  question = question, \n  rubric = rubric,\n  answer = bad_answer\n)\n\nUsing model = \"claude-sonnet-4-20250514\".\n\n\n**Feedback:**\n\n- **Part (a) - Code correctly fits linear regression model with the correct \nresponse and predictor variables using tidymodels functions.** Your code \ncorrectly fits a linear regression model with weight as the response and habit \nas the predictor using the `linear_reg()` and `fit()` functions from \ntidymodels.\n\n- **Part (a) - Regression summary is displayed with `tidy()`.** You need to \ndisplay the regression summary using the `tidy()` function - currently you're \nonly showing the model object itself.\n\n- **Part (b) - Estimated least squares regression line is correct.** Your \nequation has several issues: the coefficient values don't match what would come\nfrom the actual model output, you're missing the \"hat\" notation for predicted \nvalues, and the variable name should match the actual coding of the habit \nvariable.\n\n- **Part (c) - Narrative provides correct interpretation of the intercept in \ncontext of the data.** Your interpretation is confusing and contains errors - \nyou mention \"habit factor value = 0\" and \"weight of mothers\" instead of \nfocusing on baby weights, and you state the weight is \"always\" 7.27 pounds \nrather than using language about expectations or averages.\n\n- **Part (c) - Narrative states that the intercept is meaningful and provides \ncorrect justification.** You haven't addressed whether the intercept is \nmeaningful in this context or provided appropriate justification for your \nconclusion.\n\n- **Part (d) - Narrative provides correct interpretation of the slope in \ncontext of the data.** Your interpretation is close but needs to include \nlanguage about expectations or averages rather than making a definitive \nstatement about individual babies.\n\n- **Code smell, style, and readability: The code should follow the Tidyverse \nstyle guide.** Your code needs improvement in spacing - there should be spaces \naround the `=` sign and after commas in function calls (e.g., `data = \nbirths14_habitgiven`).\n\n\n\n\nBelow is what we might consider a good answer to this question.\n\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() |&gt;\n  fit(weight ~ habit, data = births14_habitgiven)\n\ntidy(wt_habit_fit)\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)    7.27     0.0435    167.   0         \n2 habitsmoker   -0.593    0.128      -4.65 0.00000382\n\n\n\n\n\n\\[ \\widehat{weight} = 7.27 - 0.59 \\times smoker \\]\n\nThe expected weight of babies born to non-smoker mothers is 7.27 pounds. This intercept is meaningful because it is plausible that women in the sample are non-smokers, and 7.27 lbs is a possible weight of a newborn baby.\nBabies born to smokers are, on average, about 0.59 pounds lighter than babies with non-smoker mothers.\n\nProvide feedback to the answer above.\n\nprompt(\n  question = question, \n  rubric = rubric,\n  answer = good_answer\n)\n\nUsing model = \"claude-sonnet-4-20250514\".\n\n\n**Feedback:**\n\n• **Part (a) - Code correctly fits linear regression model with the correct \nresponse and predictor variables using tidymodels functions.** Your code \ncorrectly uses `linear_reg()` and `fit()` with the appropriate variables, but \nyou need to add proper spacing around the `=` sign in \n`data=births14_habitgiven`.\n\n• **Part (a) - Regression summary is displayed with `tidy()`.** This \nrequirement is not met - you displayed the raw model output instead of using \nthe `tidy()` function to create a clean summary table.\n\n• **Part (b) - Estimated least squares regression line is correct.** This does \nnot meet the requirement - your equation has incorrect coefficient values and \nshould use proper notation with a hat symbol over y to indicate predicted \nvalues.\n\n• **Part (c) - Narrative provides correct interpretation of the intercept in \ncontext of the data.** This does not meet the requirement - your interpretation\nis confusing and doesn't clearly explain what the intercept represents in terms\nof expected baby weight for non-smoking mothers.\n\n• **Part (c) - Narrative states that the intercept is meaningful and provides \ncorrect justification.** This requirement is not met - you don't clearly state \nwhether the intercept is meaningful or provide proper justification for your \nconclusion.\n\n• **Part (d) - Narrative provides correct interpretation of the slope in \ncontext of the data.** This partially meets the requirement but should include \nlanguage about \"on average\" or \"expected\" rather than stating it as an absolute\nfact about individual babies.\n\n• **Code smell, style, and readability: The code should follow the Tidyverse \nstyle guide.** This partially meets the requirement - while you use the base \npipe correctly, you need to add spaces around the equals sign and after the \ncomma in your `fit()` function.\n\n\n\n\nProvide feedback to the same answer from the previous tab.\n\nprompt(\n  question = question, \n  rubric = rubric,\n  answer = good_answer\n)\n\nUsing model = \"claude-sonnet-4-20250514\".\n\n\n**Feedback:**\n\n• **Part (a) - Code correctly fits linear regression model with the correct \nresponse and predictor variables using tidymodels functions.** Your code \ncorrectly uses `linear_reg()` and `fit()` with the appropriate variables, but \nyou need to add a space after the comma in your function call.\n\n• **Part (a) - Regression summary is displayed with `tidy()`.** This \nrequirement is not met - you need to display the tidy summary output using the \n`tidy()` function on your fitted model object.\n\n• **Part (b) - Estimated least squares regression line is correct.** This does \nnot meet the requirement - you need to use the actual coefficient values from \nyour model output and include proper notation (such as $\\widehat{y}$ for the \npredicted value).\n\n• **Part (c) - Narrative provides correct interpretation of the intercept in \ncontext of the data.** This does not meet the requirement - your interpretation\nis unclear and contains errors; you need to explain what the intercept \nrepresents in terms of expected baby weight for a specific group, using \nlanguage like \"on average\" or \"expected.\"\n\n• **Part (c) - Narrative states that the intercept is meaningful and provides \ncorrect justification.** This requirement is not met - you need to clearly \nstate whether the intercept is meaningful and provide a proper justification \nbased on the plausibility of the baseline condition.\n\n• **Part (d) - Narrative provides correct interpretation of the slope in \ncontext of the data.** This partially meets the requirement but needs \nimprovement - you should use language indicating this is about \nexpectations/averages rather than individual cases, and ensure your numerical \nvalues match the model output.\n\n• **Code smell, style, and readability: The code should follow the Tidyverse \nstyle guide.** Your code mostly follows the style guide but needs a space after\nthe comma in your `fit()` function call.",
+    "crumbs": [
+      "Activities",
+      "Activity #2"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Leveraging LLMs for student feedback in introductory data science courses",
@@ -8,5 +185,133 @@
     "crumbs": [
       "Home"
     ]
+  },
+  {
+    "objectID": "activities/activity-1.html",
+    "href": "activities/activity-1.html",
+    "title": "Activity #1",
+    "section": "",
+    "text": "Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.\n\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\n\n\n\n\n\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows",
+    "crumbs": [
+      "Activities",
+      "Activity #1"
+    ]
+  },
+  {
+    "objectID": "activities/activity-1.html#step-1",
+    "href": "activities/activity-1.html#step-1",
+    "title": "Activity #1",
+    "section": "",
+    "text": "Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.\n\n\nFor this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\n\n\n\n\n\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\n\n\n\n\nlibrary(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(\"data/country-inflation.csv\")\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)\n\n# A tibble: 1,178 × 3\n   country   year  inflationrate\n   &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;\n 1 Australia 1993          1.75 \n 2 Australia 1994          1.97 \n 3 Australia 1995          4.63 \n 4 Australia 1996          2.62 \n 5 Australia 1997          0.225\n 6 Australia 1998          0.860\n 7 Australia 1999          1.48 \n 8 Australia 2000          4.46 \n 9 Australia 2001          4.41 \n10 Australia 2002          2.98 \n# ℹ 1,168 more rows",
+    "crumbs": [
+      "Activities",
+      "Activity #1"
+    ]
+  },
+  {
+    "objectID": "activities/activity-1.html#step-2",
+    "href": "activities/activity-1.html#step-2",
+    "title": "Activity #1",
+    "section": "Step 2",
+    "text": "Step 2\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, and the rubric.\nRubric\n\n\nCode uses pivot_longer().\nCode names the data frame something short and informative.\nCode names the year variable year and the inflation variable annual_inflation.\nCode transforms the year variable to numeric inside pivot_longer().\nOutput displays country_inflation_longer.\nOutput has 3 columns: country, year, and annual_inflation.\nNarrative states the correct numbers of rows and columns.\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present.",
+    "crumbs": [
+      "Activities",
+      "Activity #1"
+    ]
+  },
+  {
+    "objectID": "activities/activity-1.html#step-3",
+    "href": "activities/activity-1.html#step-3",
+    "title": "Activity #1",
+    "section": "Step 3",
+    "text": "Step 3\nPractice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, the rubric, and a customized prompt.",
+    "crumbs": [
+      "Activities",
+      "Activity #1"
+    ]
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-bad.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-bad.html",
+    "title": "\ncountry_inflation pivot longer",
+    "section": "",
+    "text": "library(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(here::here(\"data\", \"country-inflation.csv\"))\n\nThere are 3 columns and 1178 rows in this new data frame.\n\ndf &lt;- country_inflation |&gt; \n    pivot_longer(\n    cols = -country,names_to = \"year\", \n    values_to = \"inflationrate\"\n               )\nprint(df)"
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-RD.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-RD.html",
+    "title": "country_inflation pivot longer",
+    "section": "",
+    "text": "Code uses pivot_longer()\nCode names the data frame something short and informative\nCode names the year variable year and the inflation variable annual_inflation\nCode transforms the year variable to numeric inside pivot_longer()\nOutput displays country_inflation_longer\nOutput has 3 columns: country, year, and annual_inflation\nNarrative states the correct numbers of rows and columns, 1,178 rows and 3.\nCode style and readability: Line breaks after each |&gt;, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present."
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-Q.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-Q.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "For this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder. Below is a peek at the data.\n\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has."
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-Q.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-Q.html",
+    "title": "country_inflation pivot longer",
+    "section": "",
+    "text": "For this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder.\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has.\nRequirements:\n\nYour code must use one of pivot_longer() or pivot_wider(). There are other ways you can do this reshaping move in R, but this question requires solving this problem by pivoting.\nIn your pivot_*() function, you must use names_transform = as.numeric as an argument to transform the variable type to numeric as you pivot the data so that in the resulting data frame the year variable is numeric.\nThe resulting data frame must be saved as something other than country_inflation so you (1) can refer to this data frame later in your analysis and (2) do not overwrite country_inflation. Finally, use a short but informative name for this new data frame."
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/activity-2-tidy-country-inflation-pivot-longer-Q.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/activity-2-tidy-country-inflation-pivot-longer-Q.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "For this question you will work with inflation data from various countries in the world over the last 30 years. The dataset is called country-inflation.csv and it’s in your data folder.\nReshape (pivot) country_inflation such that each row represents a country/year combination, with columns country, year, and annual_inflation. Then, display the resulting data frame and state how many rows and columns it has."
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-mediocre-2.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-mediocre-2.html",
+    "title": "\ncountry_inflation pivot longer",
+    "section": "",
+    "text": "library(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(here::here(\"data\", \"country-inflation.csv\"))\n\nThis data frame has 3 columns and 1178 rows.\n\ncountry_inflation_longer &lt;- country_inflation |&gt; \n  pivot_longer(\n    cols = -country,\n    names_to = \"year\",\n    values_transform = as.numeric,\n  ) |&gt;\n  rename(annual_inflation = value)\n\nprint(country_inflation_longer)"
+  },
+  {
+    "objectID": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-good.html",
+    "href": "activities/questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-good.html",
+    "title": "\ncountry_inflation pivot longer",
+    "section": "",
+    "text": "library(tidyverse)\n\n\ncountry_inflation &lt;- read_csv(here::here(\"data\", \"country-inflation.csv\"))\n\nThe data frame, “yearly_inflation,” has 1,178 rows and three columns.\n\nyearly_inflation &lt;- country_inflation |&gt;\n  pivot_longer(\n    cols = `1993`:`2023`,\n    names_to = \"year\",\n    names_transform = as.numeric,\n    values_to = \"annual_inflation\"\n  )\n\nyearly_inflation"
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-RD.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-RD.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "Part (a) - Code correctly fits linear regression model with weight as the response and habit as the predictor using tidymodels functions.\nPart (a) - Regression summary is displayed with tidy().\nPart (b) - Estimated least squares regression line is correct.\n\nThe outcome is the predicted value of the variable, either spelled out in words or using math text. For example, using math text, the following would earn full marks: \\[ \\widehat{y} = 7.27 + (-0.59)\\times smoker \\]\nCorrect values from the model output.\n\nPart (c) - Narrative provides correct interpretation of the intercept in context of the data.\n\nExample that would earn full marks: The expected weight of babies born when the mother is a non-smoker is 7.27 pounds\nStatement should mention “on average” or “in expectation” versus being about an individual baby born to an individual mother.\n\nPart (c) - Narrative states that the intercept is meaningful and provides correct justification.\n\nExample that would earn full marks: This intercept is meaningful in the context of the data because it is plausible that women in the sample are non-smokers, and 7.27 is a possible weight of a newborn baby.\n\nPart (d) - Narrative provides correct interpretation of the slope in context of the data.\n\nNote: statement should state something like “on average” or “in expectation”, versus stating something about an individual.\nExample that would earn full marks: Babies born to smokers are expected to be about 0.59 pounds lighter than babies born to non-smokers would earn full marks.\n\nCode smell, style, and readability: The code should follow the Tidyverse style guide, and should specifically abide by the following rules:\n\nThe code should use the base pipe (|&gt;) instead of the magrittr pipe (%&gt;%).\nThere should be a line breaks after each |&gt;.\nCode should be properly indented.\nThere should be spaces around equal (=) signs, if they are present\nThere should be spaces after commas, if they are present."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() |&gt; fit(weight~habit,data=births14_habitgiven)\n\nwt_habit_fit\n\n\n\n\n\\[ y = 7.2 + 0.6\\times smoker_factor \\]\n\nWhen the habit factor value = 0, and because the LSRL line is negative, and the median birth weight for smoking mothers is less than non-smoking mothers. The weight of mothers born to non-smoker mothers is always 7.27 pounds.\nA baby born to a smoker is 0.59 pounds lighter than a baby with a non-smoker mother."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-R.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-R.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "Part (a) - Code correctly fits linear regression model with the correct response and predictor variables using tidymodels functions.\nPart (a) - Regression summary is displayed with tidy().\nPart (b) - Estimated least squares regression line is correct.\nPart (c) - Narrative provides correct interpretation of the intercept in context of the data.\nPart (c) - Narrative states that the intercept is meaningful and provides correct justification.\nPart (d) - Narrative provides correct interpretation of the slope in context of the data.\nCode smell, style, and readability: The code should follow the Tidyverse style guide."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-sample-answer-good.html",
+    "href": "activities/questions/model-birth-simple-linear/activity-2-model-births-simple-linear-sample-answer-good.html",
+    "title": "Help from AI",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() |&gt;\n  fit(weight ~ habit, data = births14_habitgiven)\n\ntidy(wt_habit_fit)\n\n\n\n\n\\[ \\widehat{weight} = 7.27 - 0.59 \\times smoker \\]\n\nThe expected weight of babies born to non-smoker mothers is 7.27 pounds. This intercept is meaningful because it is plausible that women in the sample are non-smokers, and 7.27 lbs is a possible weight of a newborn baby.\nBabies born to smokers are, on average, about 0.59 pounds lighter than babies with non-smoker mothers."
+  },
+  {
+    "objectID": "activities/questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-mediocre.html",
+    "href": "activities/questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-mediocre.html",
+    "title": "modeling births simple linear model",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n\n\nbirths14_habitgiven &lt;- births14 |&gt;\n  filter(!is.na(habit))\n\n\n\n\n\nwt_habit_fit &lt;- linear_reg() |&gt;\n  fit(weight ~ habit, data = births14_habitgiven)\n\ntidy(wt_habit_fit)\n\n\n\n\n\\[ \\hat{y} = 7.27 + -0.59\\times smoker \\]\n\nThe expected weight of babies born to non-smoker mothers is the difference between the median weight of smoker and non-smoker babies, is 7.27 pounds. This intercept is meaningful because women in the sample can be non-smokers, and 7.27 lbs is a possible weight of a newborn.\nBabies born to smokers are, on average, about 0.59 pounds less than non-smoker mothers."
   }
 ]
