@@ -1,0 +1,202 @@
+---
+title: "Activity #2"
+---
+
+Use **[ellmer](https://ellmer.tidyverse.org)** to interact with the an LLM (Anthropic, in this case) to generate feedback.
+
+## Tooling
+
+```{r}
+#| label: source-prompt-fn
+#| include: false
+source("prompt.R")
+```
+
+`prompt.R`:
+
+```{r}
+#| echo: false
+prompt
+```
+
+**Note:** The system prompt points to a file that has the contents of the [pipes chapter](https://style.tidyverse.org/pipes.html) of the Tidyverse style guide.
+
+## Example: Tidying
+
+Below is a question on tidying.
+
+::: question
+{{< include questions/tidy-country-inflation-pivot-longer/activity-2-tidy-country-inflation-pivot-longer-Q.qmd >}}
+:::
+
+<br>
+
+```{r}
+#| label: tidying-text
+#| code-fold: true
+#| code-summary: Code for constructing function inputs
+question <- read_lines("questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-Q.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+rubric <- read_lines("questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-R.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+rubric_detailed <- read_lines("questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-RD.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+bad_answer <- read_lines("questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-bad.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+good_answer <- read_lines("questions/tidy-country-inflation-pivot-longer/tidy-country-inflation-pivot-longer-sample-answer-good.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+```
+
+::: {.panel-tabset}
+
+### Bad
+
+Below is what we might consider a bad answer to this question.
+
+::: answer
+{{< include questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-bad.qmd >}}
+:::
+
+Provide feedback to the answer above using the following rubric.
+
+::: rubric
+{{< include questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-R.qmd >}}
+:::
+
+```{r}
+#| label: tidying-bad-eval-1
+prompt(
+  question = question, 
+  rubric = rubric,
+  answer = bad_answer
+)
+```
+
+### Bad, again
+
+Provide feedback to the same answer from the previous tab.
+
+```{r}
+#| label: tidying-bad-eval-2
+prompt(
+  question = question, 
+  rubric = rubric,
+  answer = bad_answer
+)
+```
+
+### Good
+
+Below is what we might consider a good answer to this question.
+
+::: answer
+{{< include questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-good.qmd >}}
+:::
+
+Provide feedback to the answer above.
+
+```{r}
+#| label: tidying-good-eval-1
+prompt(
+  question = question, 
+  rubric = rubric,
+  answer = good_answer
+)
+```
+
+:::
+
+## Example: Modeling
+
+Below is a question on modeling:
+
+{{< include questions/model-birth-simple-linear/activity-2-model-births-simple-linear-Q.qmd >}}
+
+<br>
+
+```{r}
+#| label: modeling-text
+#| code-fold: true
+#| code-summary: Code for constructing function inputs
+question <- read_lines("questions/model-birth-simple-linear/model-births-simple-linear-Q.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+rubric <- read_lines("questions/model-birth-simple-linear/model-births-simple-linear-R.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+rubric_detailed <- read_lines("questions/model-birth-simple-linear/model-births-simple-linear-RD.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+bad_answer <- read_lines("questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+
+good_answer <- read_lines("questions/model-birth-simple-linear/model-births-simple-linear-sample-answer-bad.qmd") |>
+  glue_collapse() |>
+  str_remove("---.*?---")
+```
+
+::: {.panel-tabset}
+
+### Bad
+
+Below is what we might consider a bad answer to this question.
+
+{{< include questions/model-birth-simple-linear/activity-2-model-births-simple-linear-sample-answer-bad.qmd >}}
+
+Provide feedback to the answer above using the following rubric.
+
+{{< include questions/model-birth-simple-linear/activity-2-model-births-simple-linear-R.qmd >}}
+
+```{r}
+#| label: modeling-bad-eval-1
+prompt(
+  question = question, 
+  rubric = rubric,
+  answer = bad_answer
+)
+```
+
+### Good
+
+Below is what we might consider a good answer to this question.
+
+{{< include questions/model-birth-simple-linear/activity-2-model-births-simple-linear-sample-answer-good.qmd >}}
+
+Provide feedback to the answer above.
+
+```{r}
+#| label: modeling-good-eval-1
+prompt(
+  question = question, 
+  rubric = rubric,
+  answer = good_answer
+)
+```
+
+### Good, again
+
+Provide feedback to the same answer from the previous tab.
+
+```{r}
+#| label: modeling-good-eval-2
+prompt(
+  question = question, 
+  rubric = rubric,
+  answer = good_answer
+)
+```
+
+:::

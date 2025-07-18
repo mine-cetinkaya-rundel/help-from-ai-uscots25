@@ -1,0 +1,33 @@
+---
+title: "modeling `births` simple linear model"
+subtitle: Suggested answer
+---
+
+```{r}
+#| label: load-packages
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+```
+
+```{r}
+#| label: define-df
+births14_habitgiven <- births14 |>
+  filter(!is.na(habit))
+```
+a.  
+
+```{r}
+wt_habit_fit <- linear_reg() |>
+  fit(weight ~ habit, data = births14_habitgiven)
+
+tidy(wt_habit_fit)
+```
+
+b.  
+
+$$ \widehat{y} = 7.27 + (-0.59)\times smoker $$
+
+c.  The expected weight of babies born when the mother is a non-smoker is 7.27 pounds. This intercept is meaningful in the context of the data because it is plausible that women in the sample are non-smokers, and 7.27 is a possible weight of a newborn baby. 
+
+d.  Babies born to smokers are expected to be about 0.59 pounds lighter than babies born to non-smokers.

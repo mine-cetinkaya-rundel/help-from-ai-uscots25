@@ -1,0 +1,15 @@
+{
+  "hash": "1a180e2940d13a7363efefaaa20d8de4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"modeling `births` simple linear model\"\nsubtitle: Suggested answer\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nbirths14_habitgiven <- births14 |>\n  filter(!is.na(habit))\n```\n:::\n\na.  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nwt_habit_fit <- linear_reg() |>\n  fit(weight ~ habit, data = births14_habitgiven)\n\ntidy(wt_habit_fit)\n```\n:::\n\n\nb.  \n\n$$ \\widehat{y} = 7.27 + (-0.59)\\times smoker $$\n\nc.  The expected weight of babies born when the mother is a non-smoker is 7.27 pounds. This intercept is meaningful in the context of the data because it is plausible that women in the sample are non-smokers, and 7.27 is a possible weight of a newborn baby. \n\nd.  Babies born to smokers are expected to be about 0.59 pounds lighter than babies born to non-smokers.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

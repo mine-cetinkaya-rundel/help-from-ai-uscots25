@@ -1,0 +1,17 @@
+{
+  "hash": "1a1505824c050c14a41298c064abc962",
+  "result": {
+    "engine": "knitr",
+    "markdown": "For this question you will work with inflation data from various countries in the world over the last 30 years.\nThe dataset is called `country-inflation.csv` and it's in your `data` folder.\nBelow is a peek at the data.\n\n\n::: {.cell}\n\n:::\n\n\n<br>\n\nReshape (pivot) `country_inflation` such that each row represents a country/year combination, with columns `country`, `year`, and `annual_inflation`.\nThen, display the resulting data frame and state how many rows and columns it has.\n",
+    "supporting": [
+      "activity-1-tidy-country-inflation-pivot-longer-Q_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

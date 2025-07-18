@@ -1,0 +1,20 @@
+---
+title: "`country_inflation` pivot longer"
+subtitle: Rubric
+---
+
+-   Code uses `pivot_longer()`
+
+-   Code names the data frame something short and informative
+
+-   Code names the year variable `year` and the inflation variable `annual_inflation`
+
+-   Code transforms the year variable to numeric inside `pivot_longer()`
+
+-   Output displays `country_inflation_longer`
+
+-   Output has 3 columns: `country`, `year`, and `annual_inflation`
+
+-   Narrative states the correct numbers of rows and columns
+
+-   Code style and readability: Line breaks after each |>, proper indentation, spaces around = signs if they are present, and spaces after commas if they are present.

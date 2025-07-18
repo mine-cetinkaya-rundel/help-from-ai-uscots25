@@ -1,0 +1,33 @@
+---
+title: "Activity #1"
+---
+
+## Step 1
+
+Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.
+
+### Question
+
+::: question
+{{< include questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-Q.qmd >}}
+:::
+
+### Sample answer
+
+::: answer
+{{< include questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-sample-answer-bad.qmd >}}
+:::
+
+## Step 2
+
+Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, and the rubric.
+
+### Rubric
+
+::: rubric
+{{< include questions/tidy-country-inflation-pivot-longer/activity-1-tidy-country-inflation-pivot-longer-R.qmd >}}
+:::
+
+## Step 3
+
+Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, the rubric, and a customized prompt.

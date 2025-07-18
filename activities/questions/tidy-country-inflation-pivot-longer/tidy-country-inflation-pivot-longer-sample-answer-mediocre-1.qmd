@@ -1,0 +1,30 @@
+---
+title: "`country_inflation` pivot longer"
+subtitle: Suggested answer - Mediocre
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+#| label: load-country-data
+#| message: false
+country_inflation <- read_csv(here::here("data", "country-inflation.csv"))
+```
+
+The resulting data frame has 3 columns and 1178 rows.
+
+```{r}
+#| label: pivot-inflation-value
+new_country_inflation <- country_inflation |> 
+  pivot_longer(
+    cols = -country,
+    names_to = "year",
+    values_transform = as.numeric,
+    values_to = "inflation_rate",
+  )
+new_country_inflation
+```

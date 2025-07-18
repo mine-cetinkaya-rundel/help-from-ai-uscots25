@@ -1,0 +1,19 @@
+---
+title: "`country_inflation` pivot longer"
+subtitle: Question
+---
+
+For this question you will work with inflation data from various countries in the world over the last 30 years.
+The dataset is called `country-inflation.csv` and it's in your `data` folder.
+
+Reshape (pivot) `country_inflation` such that each row represents a country/year combination, with columns `country`, `year`, and `annual_inflation`.
+Then, display the resulting data frame and state how many rows and columns it has.
+
+Requirements:
+
+-   Your code must use one of [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) or [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html).
+    There are other ways you can do this reshaping move in R, but this question requires solving this problem by pivoting.
+
+-   In your `pivot_*()` function, you must use `names_transform = as.numeric` as an argument to transform the variable type to numeric as you pivot the data so that in the resulting data frame the year variable is numeric.
+
+-   The resulting data frame must be saved as something other than `country_inflation` so you (1) can refer to this data frame later in your analysis and (2) do not overwrite `country_inflation`. Finally, use a short but informative name for this new data frame. 

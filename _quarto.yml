@@ -24,7 +24,24 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: activity.qmd
-        text: Activity
+      - text: "---"
+      - text: Activities
+        contents:
+          - href: activities/activity-1.qmd
+            text: "Activity #1"
+          - href: activities/activity-2.qmd
+            text: "Activity #2"
 
-format: html
+format: 
+  html:
+    mainfont: Atkinson Hyperlegible
+    highlight-style: a11y-dark
+
+theme: [cosmo, style.scss]
+toc: true
+code-copy: hover
+code-link: true
+code-overflow: wrap
+
+execute:
+  freeze: auto

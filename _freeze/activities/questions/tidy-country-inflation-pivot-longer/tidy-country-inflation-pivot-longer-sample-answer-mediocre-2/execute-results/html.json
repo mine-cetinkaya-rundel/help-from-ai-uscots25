@@ -1,0 +1,15 @@
+{
+  "hash": "fb2cbfe7251354f2c379c3afb24c727f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"`country_inflation` pivot longer\"\nsubtitle: Suggested answer - Mediocre\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ncountry_inflation <- read_csv(here::here(\"data\", \"country-inflation.csv\"))\n```\n:::\n\n\nThis data frame has 3 columns and 1178 rows.\n\n\n::: {.cell}\n\n```{.r .cell-code}\ncountry_inflation_longer <- country_inflation |> \n  pivot_longer(\n    cols = -country,\n    names_to = \"year\",\n    values_transform = as.numeric,\n  ) |>\n  rename(annual_inflation = value)\n\nprint(country_inflation_longer)\n```\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

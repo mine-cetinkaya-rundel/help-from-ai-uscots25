@@ -1,0 +1,33 @@
+---
+title: "modeling `births` simple linear model"
+subtitle: Sample answer - bad
+---
+
+```{r}
+#| label: load-packages
+library(tidyverse)
+library(tidymodels)
+library(openintro)
+```
+
+```{r}
+#| label: define-df
+births14_habitgiven <- births14 |>
+  filter(!is.na(habit))
+```
+
+a.  
+
+```{r}
+wt_habit_fit <- linear_reg() |> fit(weight~habit,data=births14_habitgiven)
+
+wt_habit_fit
+```
+
+b.  
+
+$$ y = 7.2 + 0.6\times smoker_factor $$
+
+c.  When the habit factor value = 0, and because the LSRL line is negative, and the median birth weight for smoking mothers is less than non-smoking mothers. The weight of mothers born to non-smoker mothers is always 7.27 pounds. 
+
+d.  A baby born to a smoker is 0.59 pounds lighter than a baby with a non-smoker mother. 

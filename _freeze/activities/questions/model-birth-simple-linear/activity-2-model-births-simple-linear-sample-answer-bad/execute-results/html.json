@@ -1,0 +1,17 @@
+{
+  "hash": "a92459b380ab6ba2ebab48bb2905dce6",
+  "result": {
+    "engine": "knitr",
+    "markdown": "\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(tidymodels)\nlibrary(openintro)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nbirths14_habitgiven <- births14 |>\n  filter(!is.na(habit))\n```\n:::\n\n\na.  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nwt_habit_fit <- linear_reg() %>% fit(weight~habit,data=births14_habitgiven)\n\nwt_habit_fit\n```\n:::\n\n\nb.  \n\n$$ y = 7.2 + 0.6\\times smoker_factor $$\n\nc.  When the habit factor value = 0, and because the LSRL line is negative, and the median birth weight for smoking mothers is less than non-smoking mothers. The weight of mothers born to non-smoker mothers is always 7.27 pounds. \n\nd.  A baby born to a smoker is 0.59 pounds lighter than a baby with a non-smoker mother. \n",
+    "supporting": [
+      "activity-2-model-births-simple-linear-sample-answer-bad_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

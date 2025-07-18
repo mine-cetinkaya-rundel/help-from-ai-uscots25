@@ -1,0 +1,5 @@
+For this question you will work with inflation data from various countries in the world over the last 30 years.
+The dataset is called `country-inflation.csv` and it's in your `data` folder.
+
+Reshape (pivot) `country_inflation` such that each row represents a country/year combination, with columns `country`, `year`, and `annual_inflation`.
+Then, display the resulting data frame and state how many rows and columns it has.

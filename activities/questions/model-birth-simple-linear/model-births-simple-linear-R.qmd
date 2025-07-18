@@ -1,0 +1,18 @@
+---
+title: "modeling `births` simple linear model"
+subtitle: Rubric
+---
+
+-   Part (a) - Code correctly fits linear regression model with the correct response and predictor variables using tidymodels functions.
+
+-   Part (a) - Regression summary is displayed with `tidy()`.
+
+-   Part (b) - Estimated least squares regression line is correct.
+
+-   Part (c) - Narrative provides correct interpretation of the intercept in context of the data.
+
+-   Part (c) - Narrative states that the intercept is meaningful and provides correct justification.
+
+-   Part (d) - Narrative provides correct interpretation of the slope in context of the data.
+
+-   Code smell, style, and readability: The code should follow the Tidyverse style guide.

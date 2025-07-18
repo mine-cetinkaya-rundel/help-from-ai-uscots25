@@ -1,0 +1,36 @@
+---
+title: "modeling `births` simple linear model"
+subtitle: Detailed Rubric
+---
+
+-   Part (a) - Code correctly fits linear regression model with weight as the response and habit as the predictor using `tidymodels` functions.
+
+-   Part (a) - Regression summary is displayed with `tidy()`.
+
+-   Part (b) - Estimated least squares regression line is correct.
+
+    -   The outcome is the predicted value of the variable, either spelled out in words or using math text. For example, using math text, the following would earn full marks: $$ \widehat{y} = 7.27 + (-0.59)\times smoker $$
+
+    -   Correct values from the model output.
+
+-   Part (c) - Narrative provides correct interpretation of the intercept in context of the data.
+
+    -   Example that would earn full marks: The expected weight of babies born when the mother is a non-smoker is 7.27 pounds
+    -   Statement should mention "on average" or "in expectation" versus being about an individual baby born to an individual mother. 
+
+-   Part (c) - Narrative states that the intercept is meaningful and provides correct justification.
+
+    - Example that would earn full marks: This intercept is meaningful in the context of the data because it is plausible that women in the sample are non-smokers, and 7.27 is a possible weight of a newborn baby.
+
+-   Part (d) - Narrative provides correct interpretation of the slope in context of the data.
+
+    -   Note: statement should state something like "on average" or "in expectation", versus stating something about an individual. 
+    -   Example that would earn full marks: Babies born to smokers are expected to be about 0.59 pounds lighter than babies born to non-smokers would earn full marks. 
+
+-   Code smell, style, and readability: The code should follow the Tidyverse style guide, and should specifically abide by the following rules:
+
+    - The code should use the base pipe (|>) instead of the magrittr pipe (%>%).
+    - There should be a line breaks after each |>.
+    - Code should be properly indented.
+    - There should be spaces around equal (=) signs, if they are present
+    - There should be spaces after commas, if they are present.

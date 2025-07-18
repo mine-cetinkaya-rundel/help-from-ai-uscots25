@@ -1,0 +1,21 @@
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+#| message: false
+country_inflation <- read_csv("data/country-inflation.csv")
+```
+
+There are 3 columns and 1178 rows in this new data frame. 
+
+```{r}
+#| label: pivoting-data
+df <- country_inflation |> 
+    pivot_longer(
+    cols = -country,names_to = "year", 
+    values_to = "inflationrate"
+               )
+print(df)
+```

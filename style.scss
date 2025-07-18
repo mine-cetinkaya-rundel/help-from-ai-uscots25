@@ -1,0 +1,32 @@
+/*-- scss:defaults --*/
+
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+
+$font-family: "Atkinson Hyperlegible", sans-serif;
+
+/*-- scss:rules --*/
+
+.question {
+  border-left: 3px solid #5D737E;
+  padding-left: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  background: #5D737E10;
+}
+
+.answer {
+  border-left: 3px solid #BCF4F5;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  background: #BCF4F550;
+}
+
+.rubric {
+  border-left: 3px solid #FADA5E;
+  padding-left: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  background: #FADA5E30;
+}
+

@@ -1,0 +1,25 @@
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+#| label: load-country-data
+#| message: false
+country_inflation <- read_csv("data/country-inflation.csv")
+```
+
+The data frame, "yearly_inflation," has 1,178 rows and three columns.
+
+```{r}
+#| label: q4
+yearly_inflation <- country_inflation |>
+  pivot_longer(
+    cols = `1993`:`2023`,
+    names_to = "year",
+    names_transform = as.numeric,
+    values_to = "annual_inflation"
+  )
+
+yearly_inflation
+```
