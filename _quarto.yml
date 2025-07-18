@@ -1,0 +1,30 @@
+project:
+  type: website
+
+website:
+  page-navigation: true
+  site-url: https://mine-cetinkaya-rundel.github.io/help-from-ai-uscots25/
+  title: "Help from AI"
+  description: "Leveraging LLMs for student feedback in introductory data science courses breakout session at USCOTS 2025"
+  image: images/card.png
+  repo-url: https://github.com/mine-cetinkaya-rundel/help-from-ai-uscots25/
+  page-footer:
+    center:
+      - icon: github
+        href: https://github.com/pmine-cetinkaya-rundel/help-from-ai-uscots25/
+    right: "This page is built with 💙 and [Quarto](https://quarto.org/)."
+  open-graph: true
+  sidebar:
+    id: main
+    logo: images/robot-with-kids.png
+    pinned: true
+    align: center
+    search: true
+    collapse-level: 2
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: activity.qmd
+        text: Activity
+
+format: html
