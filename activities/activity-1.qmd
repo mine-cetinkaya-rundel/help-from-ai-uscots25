@@ -4,7 +4,7 @@ title: "Activity #1"
 
 ## Step 1
 
-Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question and the sample student answer alone.
+Practice using LLMs to generate feedback for students using your favorite LLM ([Chat GPT](https://chatgpt.com), [Anthropic](https://claude.ai/new), [Perplexity](https://www.perplexity.ai), etc.) and the question and the sample student answer alone.
 
 ### Question
 
@@ -20,7 +20,7 @@ Practice using LLMs to generate feedback for students using your favorite LLM (C
 
 ## Step 2
 
-Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, and the rubric.
+Practice using LLMs to generate feedback for students using your favorite LLM ([Chat GPT](https://chatgpt.com), [Anthropic](https://claude.ai/new), [Perplexity](https://www.perplexity.ai), etc.) and the question, the sample student answer, and the rubric.
 
 ### Rubric
 
@@ -30,4 +30,4 @@ Practice using LLMs to generate feedback for students using your favorite LLM (C
 
 ## Step 3
 
-Practice using LLMs to generate feedback for students using your favorite LLM (Chat GPT, Anthropic, Perplexity, etc.) and the question, the sample student answer, the rubric, and a customized prompt.
+Practice using LLMs to generate feedback for students using your favorite LLM ([Chat GPT](https://chatgpt.com), [Anthropic](https://claude.ai/new), [Perplexity](https://www.perplexity.ai), etc.) and the question, the sample student answer, the rubric, and a customized prompt.
